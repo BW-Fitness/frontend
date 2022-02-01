@@ -1,25 +1,43 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { useHistory } from "react-router-dom";
 
 export default function SignupForm(props) {
-  const { signupValues, signupUpdate, signupSubmit } = props;
-  
-  const onChange = (event) => {
-    const { name, value } = event.target;
-    signupUpdate(name, value);
-  };
+  const { push } = useHistory();
 
-  const onSubmit = (event) => {
-    event.preventDefault();
-    signupSubmit();
-  };
+  const [credentials, setCredentials] = useState({
+    username: '',
+    password: '', 
+    role: ''
+  })
+
+  const handleChange = e => {
+    setCredentials({
+      ...credentials,
+      [e.target.name]: e.target.value
+    })
+  }
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    axios.post('http://localhost:5000/api/signup', credentials)
+      .then(res => {
+        localStorage.setItem('username', res.data.username)
+        localStorage.setItem('role', res.data.role)
+        push('/signup')
+      })
+      .catch(err => {
+        console.log('REGISTER ERROR: ', err);
+      })
+  }
 
   return (
     <div className="signup-form">
-      <form className="signup-form-section" onSubmit={onSubmit}>
+      <form className="signup-form-section" onSubmit={handleSubmit}>
 
         <label>
           Role:
-          <select value={signupValues.role} name="role" onChange={onChange} placeholder="...select...">
+          <select name="role" onChange={handleChange} placeholder="...select...">
             <option value="">--Select Postion--</option>
             <option value="instructor">Instructor</option>
             <option value="client">Client</option>
@@ -28,21 +46,21 @@ export default function SignupForm(props) {
 
         <label>
           Username:
-          <input type="text" onChange={onChange} value={signupValues.username} name="username" maxLength="20"/>
+          <input type="text" onChange={handleChange} name="username" maxLength="20"/>
         </label>
 
         <label>
           Password:
-          <input type="text" onChange={onChange} value={signupValues.password} name="password"/>
+          <input type="text" onChange={handleChange} name="password"/>
         </label>
 
         <label>
           Email:
-          <input type="text" onChange={onChange} value={signupValues.email} name="email" maxLength="40"/>
+          <input type="text" onChange={handleChange} name="email" maxLength="40"/>
         </label>
 
         <div className="signupSubmit">
-          <button disabled={ !signupValues.username || !signupValues.password || !signupValues.email || !signupValues.role }>
+          <button>
             Submit
           </button>
         </div>
