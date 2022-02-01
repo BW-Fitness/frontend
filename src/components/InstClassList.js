@@ -1,5 +1,116 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
+
+import Class from './Class';
+import EditForm from './EditForm';
+import AddForm from './AddForm';
+
+const InstClassList = () => {
+  const [editing, setEditing] = useState(false);
+  const [adding, setAdding] = useState(false);
+  const [editId, setEditId] = useState();
+  const [classes, setClasses] = useState([
+    {
+      id: 1,
+      name: 'Kick Blaster',
+      type: 'Kickboxing',
+      start_time: '6:30 am',
+      duration: '1 hour',
+      intensity: 'high',
+      location: 'zoom call',
+      current_attendees: 12,
+      max_size: 25
+    }
+  ]);
+
+  useEffect(() => {
+    axios.get('/url')
+      .then(resp => {
+        // setClasses(resp);
+        console.log(resp);
+      })
+      .catch(err => {
+        console.log(err);
+      })
+  }, []);
+
+  const handleEdit = (selectedClass) => {
+    axios.put(`/url`, selectedClass)
+      .then(resp => {
+        // setClasses(resp);
+        console.log(resp);
+      })
+      .catch(err => {
+        console.log(err);
+      })
+  }
+
+  const handleAdd = (selectedClass) => {
+    axios.put(`/url`, selectedClass)
+      .then(resp => {
+        // setClasses(resp);
+        console.log(resp);
+      })
+      .catch(err => {
+        console.log(err);
+      })
+  }
+
+  const handleDelete = (id) => {
+    axios.delete(`/url/${id}`)
+      .then(resp => {
+        // setClasses(resp);
+        console.log(resp);
+      })
+      .catch(err => {
+        console.log(err);
+      })
+  }
+
+  const handleEditSelect = (id) => {
+    setEditing(true);
+    setEditId(id);
+  }
+
+  const handleAddSelect = () => {
+    setAdding(true);
+  }
+
+  const handleEditCancel = () => {
+    setEditing(false);
+  }
+
+  const handleAddCancel = () => {
+    setAdding(false);
+  }
+
+  return (
+    <ClassList>
+      <TitleWrapper>
+        <Title>My Classes</Title>
+      </TitleWrapper>
+      <ClassesWrapper>
+        {classes.map(item => {
+          return (
+            <>
+              <Class key={item.id} item={item} handleDelete={handleDelete} handleEditSelect={handleEditSelect} />
+              {editing && <EditForm editId={editId} handleEdit={handleEdit} handleEditCancel={handleEditCancel} />}
+              <ClassDivider></ClassDivider>
+            </>
+          )
+        })}
+      </ClassesWrapper>
+      {adding && <AddForm handleAdd={handleAdd} handleAddCancel={handleAddCancel} />}
+      <AddButton onClick={handleAddSelect}>Add a Class</AddButton>
+    </ClassList>
+  )
+}
+
+export default InstClassList;
+
+
+// Styled Components
 
 const ClassList = styled.div`
   display: flex;
@@ -30,32 +141,10 @@ const ClassesWrapper = styled.div`
   background-color: #ececec;
 `;
 
-const ClassCard = styled.div`
-  width: 30%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 3% 2%;
-  margin: 2%;
-  box-shadow: 0px 0px 35px 0px rgba(0,0,0,0.4);
-  border-radius: 7px;
-`;
-
-const ButtonGroup = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-`;
-
-const Button = styled.button`
-  width: 35%;
-  font-size: 1.1rem;
-  padding: 2% 1%;
-  margin: 2% auto;
-  border: none;
-  background-color: #47ACFF;
-  color: #fff;
-  cursor: pointer;
+const ClassDivider = styled.div`
+  width: 50%;
+  border-bottom: 1px solid #c4c4c4;
+  padding: 1%;
 `;
 
 const AddButton = styled.button`
@@ -68,63 +157,3 @@ const AddButton = styled.button`
   padding: 1% 0;
   cursor: pointer;
 `;
-
-const classes = [
-  {
-    id: 1,
-    name: 'Kick Blaster',
-    type: 'Kickboxing',
-    start_time: '6:30 am',
-    duration: '1 hour',
-    intensity: 'high',
-    location: 'zoom call',
-    current_attendees: 12,
-    max_size: 25
-  },
-  {
-    id: 2,
-    name: 'Zumba Stars',
-    type: 'Zumba',
-    start_time: '12:00 pm',
-    duration: '45 minutes',
-    intensity: 'low',
-    location: 'The Studio!',
-    current_attendees: 405,
-    max_size: 500
-  },
-];
-
-const InstClassList = () => {
-  return (
-    <ClassList>
-      <TitleWrapper>
-        <Title>My Classes</Title>
-      </TitleWrapper>
-      <ClassesWrapper>
-        {classes.map(item => {
-          return (
-            <ClassCard key={item.id}>
-              <h3>{item.name}</h3>
-              <p><b>Type:</b> {item.type}</p>
-              <p><b>Start Time:</b> {item.start_time}</p>
-              <p><b>Duration:</b> {item.duration}</p>
-              <p><b>Intensity:</b> {item.intensity}</p>
-              <p><b>Location:</b> {item.location}</p>
-              <p><b>Current Attendees:</b> {item.current_attendees}</p>
-              <p><b>Maximum Attendees Allowed:</b> {item.max_size}</p>
-              <div>
-                <ButtonGroup>
-                  <Button>Edit Class</Button>
-                  <Button>Delete Class</Button>
-                </ButtonGroup>
-              </div>
-            </ClassCard>
-          )
-        })}
-      </ClassesWrapper>
-      <AddButton>Add a Class</AddButton>
-    </ClassList>
-  )
-}
-
-export default InstClassList;
