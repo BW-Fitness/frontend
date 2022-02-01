@@ -38,12 +38,12 @@ export default function LoginForm(props) {
         
         <label>
           Username:
-          <input type="text" handleChange={handleChange} name="username" maxLength="20"/>
+          <input type="text" onChange={handleChange} name="username" maxLength="20"/>
         </label>
 
         <label>
           Password:
-          <input type="text" handleChange={handleChange} name="password"/>
+          <input type="text" onChange={handleChange} name="password"/>
         </label>
 
         <div className="login-submit">

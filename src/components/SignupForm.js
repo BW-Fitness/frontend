@@ -59,7 +59,7 @@ export default function SignupForm(props) {
           <input type="text" onChange={handleChange} name="email" maxLength="40"/>
         </label>
 
-        <div className="signupSubmit">
+        <div className="signup-submit">
           <button>
             Submit
           </button>
