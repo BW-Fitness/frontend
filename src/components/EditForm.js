@@ -47,7 +47,7 @@ const EditForm = (props) => {
   }
 
   return (
-    <div>
+    <EditFormWrapper>
       <h2>Edit {editingClass.name} Class</h2>
       <InputWrapper>
         <label>Name </label>
@@ -81,16 +81,34 @@ const EditForm = (props) => {
         <label>Maximum Class Size </label>
         <input value={editingClass.max_size} name='maxSize' onChange={handleChange} />
       </InputWrapper>
-      <SubButton onClick={handleSubmit}>Submit</SubButton>
-      <CancelButton onClick={handleCancel}>Cancel</CancelButton>
-    </div>
+      <ButtonGroup>
+        <SubButton onClick={handleSubmit}>Submit</SubButton>
+        <CancelButton onClick={handleCancel}>Cancel</CancelButton>
+      </ButtonGroup>
+    </EditFormWrapper>
   )
 }
 
 export default EditForm;
 
+const EditFormWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #E6EEF1;
+  border: 1px solid #57AECE;
+  padding: 0 4%;
+  margin: 3% 0;
+`;
+
 const InputWrapper = styled.div`
   margin: 2.5% 0;
+`;
+
+const ButtonGroup = styled.div`
+  display: flex;
+  margin-top: 5%;
 `;
 
 const SubButton = styled.button`
