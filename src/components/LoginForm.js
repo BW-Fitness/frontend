@@ -17,15 +17,7 @@ export default function LoginForm(props) {
   return (
     <div className="login-form">
       <form className="login-form-section" onSubmit={onSubmit}>
-        <label>
-          Role:
-          <select value={loginValues.role} name="role" onChange={onChange} placeholder="--select--">
-            <option value="">--Select Position--</option>
-            <option value="instructor">Instructor</option>
-            <option value="client">Client</option>
-          </select>
-        </label>
-
+        
         <label>
           Username:
           <input type="text" onChange={onChange} value={loginValues.username} name="username" maxLength="20"/>
