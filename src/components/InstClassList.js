@@ -90,6 +90,14 @@ const InstClassList = () => {
       <TitleWrapper>
         <Title>My Classes</Title>
       </TitleWrapper>
+      <AddWrapper>
+        {adding ? 
+          <FormWrapper>
+            <AddForm handleAdd={handleAdd} handleAddCancel={handleAddCancel} />
+          </FormWrapper>
+          : <AddButton onClick={handleAddSelect}>+ Add a Class</AddButton>
+        }
+      </AddWrapper>
       <ClassesWrapper>
         {classes.map(item => {
           return (
@@ -101,8 +109,6 @@ const InstClassList = () => {
           )
         })}
       </ClassesWrapper>
-      {adding && <AddForm handleAdd={handleAdd} handleAddCancel={handleAddCancel} />}
-      <AddButton onClick={handleAddSelect}>Add a Class</AddButton>
     </ClassList>
   )
 }
@@ -133,6 +139,15 @@ const Title = styled.h2`
   padding: 3% 0;
 `;
 
+const AddWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #ececec;
+  padding: 2% 1%;
+`;
+
 const ClassesWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -148,12 +163,22 @@ const ClassDivider = styled.div`
 `;
 
 const AddButton = styled.button`
-  width: 50%;
+  width: 15%;
   background-color: #fff;
-  font-size: 1.2rem;
-  margin: 1% auto;
+  font-size: 1.1rem;
+  margin: 1% 0;
   border: 3px solid #47ACFF;
   color: #47ACFF;
   padding: 1% 0;
   cursor: pointer;
+`;
+
+const FormWrapper = styled.div`
+  width: 40%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  padding: 2% 3%;
+  border-radius: 7px;
 `;

@@ -78,13 +78,13 @@ const AddForm = (props) => {
 export default AddForm;
 
 const InputWrapper = styled.div`
-  margin: 1% 0;
+  margin: 4% 0;
 `;
 
 const SubButton = styled.button`
   width: 125px;
-  padding: 1% 2%;
-  margin: 2% 1%;
+  padding: 3% 2%;
+  margin: 5% 1%;
   border: none;
   background-color: #47ACFF;
   color: #fff;
@@ -93,8 +93,8 @@ const SubButton = styled.button`
 
 const CancelButton = styled.button`
   width: 125px;
-  padding: 1% 2%;
-  margin: 2% 1%;
+  padding: 3% 2%;
+  margin: 5% 1%;
   border: none;
   background-color: #D00000;
   color: #fff;
