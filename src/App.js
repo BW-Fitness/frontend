@@ -15,14 +15,16 @@ function App() {
           <Route exact path='/'>
             <Navbar />
           </Route>
-          <Route path='/'>
-            <InstClassList />
-          </Route>
           <Route exact path='/login'>
+            <Navbar />
             <LoginForm />
           </Route>
           <Route exact path='/signup'>
+            <Navbar />
             <SignupForm />
+          </Route>
+          <Route exact path='/instructor'>
+            <InstClassList />
           </Route>
         </Switch>
       </BrowserRouter>
