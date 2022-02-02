@@ -1,32 +1,43 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-const initialClass = {
-  id: '',
-  name: '',
-  type: '',
-  start_time: '',
-  duration: '',
-  intensity: '',
-  location: '',
-  current_attendees: '',
-  max_size: ''
-}
+import { connect } from 'react-redux';
+import { addClass } from '../actions';
 
-const AddForm = (props) => {
-  const [addingClass, setAddingClass] = useState(initialClass);
-  const { handleAdd, handleAddCancel } = props;
+const AddForm = (props, { dispatch}) => {
+  const { handleAddCancel } = props;
+  const [state, setState] = useState({
+    id: '',
+    name: '',
+    type: '',
+    start_time: '',
+    duration: '',
+    intensity: '',
+    location: '',
+    current_attendees: '',
+    max_size: ''
+  });
 
   const handleChange = (e) => {
-    setAddingClass({
-      ...addingClass,
+    setState({
+      ...state,
       [e.target.name]: e.target.value
-    })
+    });
   }
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    handleAdd(addingClass);
+    dispatch(addClass({
+      id: state.id,
+      name: state.name,
+      type: state.type,
+      start_time: state.start_time,
+      duration: state.duration,
+      intensity: state.intensity,
+      location: state.location,
+      current_attendees: state.current_attendees,
+      max_size: state.max_size
+    }));
   }
 
   const handleCancel = (e) => {
@@ -39,35 +50,35 @@ const AddForm = (props) => {
       <h2>Add A Class</h2>
       <InputWrapper>
         <label>Name </label>
-        <input value='' name='name' onChange={handleChange} />
+        <input value={state.name} name='name' onChange={handleChange} />
       </InputWrapper>
       <InputWrapper>
         <label>Type </label>
-        <input value='' name='type' onChange={handleChange} />
+        <input value={state.type} name='type' onChange={handleChange} />
       </InputWrapper>
       <InputWrapper>
         <label>Start Time </label>
-        <input value='' name='startTime' onChange={handleChange} />
+        <input value={state.start_time} name='startTime' onChange={handleChange} />
       </InputWrapper>
       <InputWrapper>
         <label>Duration </label>
-        <input value='' name='duration' onChange={handleChange} />
+        <input value={state.duration} name='duration' onChange={handleChange} />
       </InputWrapper>
       <InputWrapper>
         <label>Intensity </label>
-        <input value='' name='intensity' onChange={handleChange} />
+        <input value={state.intensity} name='intensity' onChange={handleChange} />
       </InputWrapper>
       <InputWrapper>
         <label>Location </label>
-        <input value='' name='location' onChange={handleChange} />
+        <input value={state.location} name='location' onChange={handleChange} />
       </InputWrapper>
       <InputWrapper>
         <label>Current Attendees </label>
-        <input value='' name='currentAttendees' onChange={handleChange} />
+        <input value={state.current_attendees} name='currentAttendees' onChange={handleChange} />
       </InputWrapper>
       <InputWrapper>
         <label>Maximum Class Size </label>
-        <input value='' name='maxSize' onChange={handleChange} />
+        <input value={state.max_size} name='maxSize' onChange={handleChange} />
       </InputWrapper>
       <SubButton onClick={handleSubmit}>Submit</SubButton>
       <CancelButton onClick={handleCancel}>Cancel</CancelButton>
@@ -75,7 +86,7 @@ const AddForm = (props) => {
   )
 }
 
-export default AddForm;
+export default connect()(AddForm);
 
 const InputWrapper = styled.div`
   margin: 4% 0;
