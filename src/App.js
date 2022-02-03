@@ -21,13 +21,13 @@ function App() {
       <BrowserRouter>
         <Navbar />
         <Switch>
-          <Route path="/login">
+          <Route exact path="/login">
             <LoginForm />
           </Route>
-          <Route path="/signup">
+          <Route exact path="/signup">
             <SignupForm />
           </Route>
-          <Route path="/">
+          <Route exact path="/">
             <InstClassList />
           </Route>
         </Switch>
