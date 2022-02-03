@@ -4,6 +4,31 @@ import { useHistory } from "react-router-dom";
 
 import styled from "styled-components";
 
+const SignupWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height 100vh;
+  background-image: url("https://s3-ap-southeast-2.amazonaws.com/oca/media/wysiwyg/how-to-add-value-to-your-personal-training-clients-1.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+`;
+
+const SignupFormBox = styled.div`
+  width: 40%;
+  background-color: #fff;
+  padding: 5% 4%;
+  border-radius: 7px;
+`;
+
+const SignForm = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;'
+  text-align: ce
+`;
+
 export default function SignupForm(props) {
   const { push } = useHistory();
 
@@ -78,29 +103,4 @@ export default function SignupForm(props) {
     </SignupWrapper>
   );
 }
-
-const SignupWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height 100vh;
-  background-image: url("https://s3-ap-southeast-2.amazonaws.com/oca/media/wysiwyg/how-to-add-value-to-your-personal-training-clients-1.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
-`;
-
-const SignupFormBox = styled.div`
-  width: 40%;
-  background-color: #fff;
-  padding: 5% 4%;
-  border-radius: 7px;
-`;
-
-const SignForm = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;'
-  text-align: ce
-`;
 
