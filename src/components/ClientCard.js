@@ -53,17 +53,6 @@ const ButtonGroup = styled.div`
   justify-content: center;
 `;
 
-const EditButton = styled.button`
-  width: 35%;
-  font-size: 1.1rem;
-  padding: 2% 1%;
-  margin: 2% auto;
-  border: none;
-  background-color: #47ACFF;
-  color: #fff;
-  cursor: pointer;
-`;
-
 const DelButton = styled.button`
   width: 35%;
   font-size: 1.1rem;
