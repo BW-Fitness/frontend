@@ -2,11 +2,11 @@ import React from "react";
 import { Route, BrowserRouter, Switch } from "react-router-dom";
 import "./App.css";
 
-import Navbar from "./components/Navbar";
-import InstClassList from "./components/InstClassList";
-import LoginForm from "./components/LoginForm";
-import SignupForm from "./components/SignupForm";
-import Home from "./components/HomePage";
+import Navbar from './components/Navbar';
+import InstClassList from './components/InstClassList';
+import LoginForm from './components/LoginForm';
+import SignupForm from './components/SignupForm';
+import ClientClassList from './components/ClientClassList';
 
 function App() {
   return (
@@ -26,6 +26,9 @@ function App() {
           </Route>
           <Route exact path="/instructor">
             <InstClassList />
+          </Route>
+          <Route exact path='/client'>
+            <ClientClassList />
           </Route>
         </Switch>
       </BrowserRouter>
