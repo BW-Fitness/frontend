@@ -1,12 +1,13 @@
-import React from 'react';
-import { Route, BrowserRouter, Switch } from 'react-router-dom';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Route, BrowserRouter, Switch } from "react-router-dom";
+import logo from "./logo.svg";
+import "./App.css";
 
-import Navbar from './components/Navbar';
-import InstClassList from './components/InstClassList';
-import LoginForm from './components/LoginForm';
-import SignupForm from './components/SignupForm';
+import Navbar from "./components/Navbar";
+import InstClassList from "./components/InstClassList";
+import LoginForm from "./components/LoginForm";
+import SignupForm from "./components/SignupForm";
+import Home from "./components/HomePage";
 
 function App() {
   return (
@@ -16,20 +17,18 @@ function App() {
 
     // </div>
 
-    <div className='App'>
+    <div className="App">
       <BrowserRouter>
+        <Navbar />
         <Switch>
-          <Route exact path='/'>
-            <Navbar />
-          </Route>
-          <Route exact path='/'>
-            <InstClassList />
-          </Route>
-          <Route exact path='/login'>
+          <Route path="/login">
             <LoginForm />
           </Route>
-          <Route exact path='/signup'>
+          <Route path="/signup">
             <SignupForm />
+          </Route>
+          <Route path="/">
+            <InstClassList />
           </Route>
         </Switch>
       </BrowserRouter>
