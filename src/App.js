@@ -7,6 +7,7 @@ import InstClassList from './components/InstClassList';
 import LoginForm from './components/LoginForm';
 import SignupForm from './components/SignupForm';
 import ClientClassList from './components/ClientClassList';
+import LandingPage from './components/LandingPage';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Switch>
           <Route exact path="/">
             <Navbar />
+            <LandingPage />
           </Route>
           <Route exact path="/login">
             <Navbar />
