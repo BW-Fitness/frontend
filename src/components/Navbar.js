@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const NavbarWrapper = styled.div`
@@ -7,7 +7,7 @@ const NavbarWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #47ACFF;
+  background-color: #47acff;
   color: #fff;
   padding: 1% 0;
 `;
@@ -37,15 +37,22 @@ const Navbar = () => {
     <NavbarWrapper>
       <Title>Anywhere Fitness</Title>
       <ButtonGroup>
-        <Link to='/login'>
+        <Link to="/login">
           <Button>Log In</Button>
         </Link>
-        <Link to='/signup'>
+        <Link to="/signup">
           <Button>Get Started</Button>
         </Link>
       </ButtonGroup>
     </NavbarWrapper>
-  )
-}
+  );
+};
+const Home = () => {
+  return (
+    <div>
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2MYwgh60AsvEAUUqQXc-kY4gvHOqsOPtQmw&usqp=CAU" />
+    </div>
+  );
+};
 
 export default Navbar;
