@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 
+import styled from "styled-components";
+
 export default function SignupForm(props) {
   const { push } = useHistory();
 
@@ -33,11 +35,13 @@ export default function SignupForm(props) {
   };
 
   return (
-    <div className="signup-form">
-      <form className="signup-form-section" onSubmit={handleSubmit}>
-        <label>
-          Role:
+    <SignupWrapper>
+      <FormBox>
+        <Form onSubmit={handleSubmit}>
+          <h1>Register</h1>
+          <label htmlFor="roleSelect">Role: </label>
           <select
+            id="roleSelect"
             name="role"
             onChange={handleChange}
             placeholder="...select..."
@@ -46,40 +50,57 @@ export default function SignupForm(props) {
             <option value="instructor">Instructor</option>
             <option value="client">Client</option>
           </select>
-        </label>
-
-        <label>
-          Username:
+          <br/>
+          <label htmlFor="signupUser">Username: </label>
           <input
+            id="signupUser"
             type="text"
             onChange={handleChange}
             name="username"
             maxLength="20"
           />
-        </label>
-
-        <label>
-          Password:
-          <input type="password" onChange={handleChange} name="password" />
-        </label>
-
-        <label>
-          Email:
+          <br/>
+          <label htmlFor="signupPass">Password: </label>
+          <input id="signupPass" type="password" onChange={handleChange} name="password" />
+          <br/>
+          <label htmlFor="signupEmail">Email: </label>
           <input
+            id="signupEmail"
             type="text"
             onChange={handleChange}
             name="email"
             maxLength="40"
           />
-        </label>
-
-        <div className="signup-submit">
-          <input type="submit" value="Sign up" />
-        </div>
-        <div className="sign-up-image">
-          <img src="https://s3-ap-southeast-2.amazonaws.com/oca/media/wysiwyg/how-to-add-value-to-your-personal-training-clients-1.jpg" />
-        </div>
-      </form>
-    </div>
+          <br/>
+          <button>Sign Up</button>
+        </Form>
+      </FormBox>
+    </SignupWrapper>
   );
 }
+
+const SignupWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height 100vh;
+  background-image: url("https://s3-ap-southeast-2.amazonaws.com/oca/media/wysiwyg/how-to-add-value-to-your-personal-training-clients-1.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+`;
+
+const FormBox = styled.div`
+  width: 40%;
+  background-color: #fff;
+  padding: 5% 4%;
+  border-radius: 7px;
+`;
+
+const Form = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;'
+  text-align: ce
+`;
+
