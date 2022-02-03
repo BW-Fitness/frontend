@@ -33,22 +33,19 @@ const Button = styled.button`
   width: 120px;
 `;
 
-const Navbar = () => {
+const AuthNavbar = () => {
   return (
     <NavbarWrapper>
       <Link to='/'>
         <Title>Anywhere Fitness</Title>
       </Link>
       <ButtonGroup>
-        <Link to="/login">
-          <Button>Log In</Button>
-        </Link>
-        <Link to="/signup">
-          <Button>Get Started</Button>
+        <Link to="/logout">
+          <Button>Logout</Button>
         </Link>
       </ButtonGroup>
     </NavbarWrapper>
   );
 };
 
-export default Navbar;
+export default AuthNavbar;
