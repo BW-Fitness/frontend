@@ -1,44 +1,43 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import axios from 'axios';
 
-const initialClass = {
-  id: '',
-  name: '',
-  type: '',
-  start_time: '',
-  duration: '',
-  intensity: '',
-  location: '',
-  current_attendees: '',
-  max_size: ''
-}
+import { connect } from 'react-redux'
+import { editClass } from '../actions';
 
-const EditForm = (props) => {
-  const [editingClass, setEditingClass] = useState(initialClass);
-  const { handleEdit, handleEditCancel, editId } = props;
-
-  useEffect(() => {
-    axios.get(`/url/${editId}`)
-      .then(resp => {
-        // setEditingClass(resp);
-        console.log(resp);
-      })
-      .catch(err => {
-        console.log(err);
-      })
-  }, []);
+const EditForm = (props, { classes, dispatch }) => {
+  const { handleEditCancel } = props;
+  const [state, setState] = useState({
+    id: '',
+    name: '',
+    type: '',
+    start_time: '',
+    duration: '',
+    intensity: '',
+    location: '',
+    current_attendees: '',
+    max_size: ''
+  })
 
   const handleChange = (e) => {
-    setEditingClass({
-      ...editingClass,
+    setState({
+      ...state,
       [e.target.name]: e.target.value
-    })
+    });
   }
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    handleEdit(editingClass);
+    dispatch(editClass({
+      id: state.id,
+      name: state.name,
+      type: state.type,
+      start_time: state.start_time,
+      duration: state.duration,
+      intensity: state.intensity,
+      location: state.location,
+      current_attendees: state.current_attendees,
+      max_size: state.max_size
+    }))
   }
 
   const handleCancel = (e) => {
@@ -48,38 +47,38 @@ const EditForm = (props) => {
 
   return (
     <EditFormWrapper>
-      <h2>Edit {editingClass.name} Class</h2>
+      <h2>Edit {state.name} Class</h2>
       <InputWrapper>
         <label>Name </label>
-        <input value={editingClass.name} name='name' onChange={handleChange} />
+        <input value={state.name} name='name' onChange={handleChange} />
       </InputWrapper>
       <InputWrapper>
         <label>Type </label>
-        <input value={editingClass.type} name='type' onChange={handleChange} />
+        <input value={state.type} name='type' onChange={handleChange} />
       </InputWrapper>
       <InputWrapper>
         <label>Start Time </label>
-        <input value={editingClass.start_time} name='startTime' onChange={handleChange} />
+        <input value={state.start_time} name='startTime' onChange={handleChange} />
       </InputWrapper>
       <InputWrapper>
         <label>Duration </label>
-        <input value={editingClass.duration} name='duration' onChange={handleChange} />
+        <input value={state.duration} name='duration' onChange={handleChange} />
       </InputWrapper>
       <InputWrapper>
         <label>Intensity </label>
-        <input value={editingClass.intensity} name='intensity' onChange={handleChange} />
+        <input value={state.intensity} name='intensity' onChange={handleChange} />
       </InputWrapper>
       <InputWrapper>
         <label>Location </label>
-        <input value={editingClass.location} name='location' onChange={handleChange} />
+        <input value={state.location} name='location' onChange={handleChange} />
       </InputWrapper>
       <InputWrapper>
         <label>Current Attendees </label>
-        <input value={editingClass.current_attendees} name='currentAttendees' onChange={handleChange} />
+        <input value={state.current_attendees} name='currentAttendees' onChange={handleChange} />
       </InputWrapper>
       <InputWrapper>
         <label>Maximum Class Size </label>
-        <input value={editingClass.max_size} name='maxSize' onChange={handleChange} />
+        <input value={state.max_size} name='maxSize' onChange={handleChange} />
       </InputWrapper>
       <ButtonGroup>
         <SubButton onClick={handleSubmit}>Submit</SubButton>
@@ -89,7 +88,13 @@ const EditForm = (props) => {
   )
 }
 
-export default EditForm;
+const mapStateToProps = state => {
+  return {
+    classes: state.classes
+  }
+}
+
+export default connect(mapStateToProps)(EditForm);
 
 const EditFormWrapper = styled.div`
   display: flex;

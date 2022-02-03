@@ -1,72 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import axios from 'axios';
+
+import { connect } from 'react-redux';
+import { getClasses } from '../actions';
 
 import Class from './Class';
 import EditForm from './EditForm';
 import AddForm from './AddForm';
 
-const InstClassList = () => {
+const InstClassList = ({ classes, dispatch }) => {
   const [editing, setEditing] = useState(false);
   const [adding, setAdding] = useState(false);
   const [editId, setEditId] = useState();
-  const [classes, setClasses] = useState([
-    {
-      id: 1,
-      name: 'Kick Blaster',
-      type: 'Kickboxing',
-      start_time: '6:30 am',
-      duration: '1 hour',
-      intensity: 'high',
-      location: 'zoom call',
-      current_attendees: 12,
-      max_size: 25
-    }
-  ]);
 
   useEffect(() => {
-    axios.get('/url')
-      .then(resp => {
-        // setClasses(resp);
-        console.log(resp);
-      })
-      .catch(err => {
-        console.log(err);
-      })
+    dispatch(getClasses());
   }, []);
-
-  const handleEdit = (selectedClass) => {
-    axios.put(`/url`, selectedClass)
-      .then(resp => {
-        // setClasses(resp);
-        console.log(resp);
-      })
-      .catch(err => {
-        console.log(err);
-      })
-  }
-
-  const handleAdd = (selectedClass) => {
-    axios.put(`/url`, selectedClass)
-      .then(resp => {
-        // setClasses(resp);
-        console.log(resp);
-      })
-      .catch(err => {
-        console.log(err);
-      })
-  }
-
-  const handleDelete = (id) => {
-    axios.delete(`/url/${id}`)
-      .then(resp => {
-        // setClasses(resp);
-        console.log(resp);
-      })
-      .catch(err => {
-        console.log(err);
-      })
-  }
 
   const handleEditSelect = (id) => {
     setEditing(true);
@@ -93,7 +42,7 @@ const InstClassList = () => {
       <AddWrapper>
         {adding ? 
           <FormWrapper>
-            <AddForm handleAdd={handleAdd} handleAddCancel={handleAddCancel} />
+            <AddForm handleAddCancel={handleAddCancel} />
           </FormWrapper>
           : <AddButton onClick={handleAddSelect}>+ Add a Class</AddButton>
         }
@@ -102,8 +51,8 @@ const InstClassList = () => {
         {classes.map(item => {
           return (
             <>
-              <Class key={item.id} item={item} handleDelete={handleDelete} handleEditSelect={handleEditSelect} />
-              {editing && <EditForm editId={editId} handleEdit={handleEdit} handleEditCancel={handleEditCancel} />}
+              <Class key={item.id} item={item} handleEditSelect={handleEditSelect} />
+              {editing && <EditForm editId={editId} handleEditCancel={handleEditCancel} />}
               <ClassDivider></ClassDivider>
             </>
           )
@@ -113,7 +62,13 @@ const InstClassList = () => {
   )
 }
 
-export default InstClassList;
+const mapStateToProps = state => {
+  return {
+    classes: state.classes
+  }
+}
+
+export default connect(mapStateToProps)(InstClassList);
 
 
 // Styled Components

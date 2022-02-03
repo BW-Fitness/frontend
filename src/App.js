@@ -1,6 +1,5 @@
 import React from "react";
 import { Route, BrowserRouter, Switch } from "react-router-dom";
-import logo from "./logo.svg";
 import "./App.css";
 
 import Navbar from "./components/Navbar";
@@ -11,23 +10,21 @@ import Home from "./components/HomePage";
 
 function App() {
   return (
-    // <div className="App">
-    //   <Route path='/' component={Navbar} />
-    //   <Route path='/' component={InstClassList} />
-
-    // </div>
-
     <div className="App">
       <BrowserRouter>
-        <Navbar />
         <Switch>
+          <Route exact path="/">
+            <Navbar />
+          </Route>
           <Route exact path="/login">
+            <Navbar />
             <LoginForm />
           </Route>
           <Route exact path="/signup">
+            <Navbar />
             <SignupForm />
           </Route>
-          <Route exact path="/">
+          <Route exact path="/instructor">
             <InstClassList />
           </Route>
         </Switch>
