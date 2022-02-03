@@ -1,6 +1,6 @@
-import React from 'react';
-import { Route, BrowserRouter, Switch } from 'react-router-dom';
-import './App.css';
+import React from "react";
+import { Route, BrowserRouter, Switch } from "react-router-dom";
+import "./App.css";
 
 import Navbar from './components/Navbar';
 import InstClassList from './components/InstClassList';
@@ -10,21 +10,21 @@ import ClientClassList from './components/ClientClassList';
 
 function App() {
   return (
-    <div className='App'>
+    <div className="App">
       <BrowserRouter>
         <Switch>
-          <Route exact path='/'>
+          <Route exact path="/">
             <Navbar />
           </Route>
-          <Route exact path='/login'>
+          <Route exact path="/login">
             <Navbar />
             <LoginForm />
           </Route>
-          <Route exact path='/signup'>
+          <Route exact path="/signup">
             <Navbar />
             <SignupForm />
           </Route>
-          <Route exact path='/instructor'>
+          <Route exact path="/instructor">
             <InstClassList />
           </Route>
           <Route exact path='/client'>

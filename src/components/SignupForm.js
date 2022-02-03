@@ -6,38 +6,42 @@ export default function SignupForm(props) {
   const { push } = useHistory();
 
   const [credentials, setCredentials] = useState({
-    username: '',
-    password: '', 
-    role: ''
-  })
+    username: "",
+    password: "",
+    role: "",
+  });
 
-  const handleChange = e => {
+  const handleChange = (e) => {
     setCredentials({
       ...credentials,
-      [e.target.name]: e.target.value
-    })
-  }
+      [e.target.name]: e.target.value,
+    });
+  };
 
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post('http://localhost:5000/api/signup', credentials)
-      .then(res => {
-        localStorage.setItem('username', res.data.username)
-        localStorage.setItem('role', res.data.role)
-        push('/signup')
+    axios
+      .post("http://localhost:5000/api/signup", credentials)
+      .then((res) => {
+        localStorage.setItem("username", res.data.username);
+        localStorage.setItem("role", res.data.role);
+        push("/");
       })
-      .catch(err => {
-        console.log('REGISTER ERROR: ', err);
-      })
-  }
+      .catch((err) => {
+        console.log("REGISTER ERROR: ", err);
+      });
+  };
 
   return (
     <div className="signup-form">
       <form className="signup-form-section" onSubmit={handleSubmit}>
-
         <label>
           Role:
-          <select name="role" onChange={handleChange} placeholder="...select...">
+          <select
+            name="role"
+            onChange={handleChange}
+            placeholder="...select..."
+          >
             <option value="">--Select Postion--</option>
             <option value="instructor">Instructor</option>
             <option value="client">Client</option>
@@ -46,23 +50,34 @@ export default function SignupForm(props) {
 
         <label>
           Username:
-          <input type="text" onChange={handleChange} name="username" maxLength="20"/>
+          <input
+            type="text"
+            onChange={handleChange}
+            name="username"
+            maxLength="20"
+          />
         </label>
 
         <label>
           Password:
-          <input type="text" onChange={handleChange} name="password"/>
+          <input type="password" onChange={handleChange} name="password" />
         </label>
 
         <label>
           Email:
-          <input type="text" onChange={handleChange} name="email" maxLength="40"/>
+          <input
+            type="text"
+            onChange={handleChange}
+            name="email"
+            maxLength="40"
+          />
         </label>
 
         <div className="signup-submit">
-          <button>
-            Submit
-          </button>
+          <input type="submit" value="Sign up" />
+        </div>
+        <div className="sign-up-image">
+          <img src="https://s3-ap-southeast-2.amazonaws.com/oca/media/wysiwyg/how-to-add-value-to-your-personal-training-clients-1.jpg" />
         </div>
       </form>
     </div>
