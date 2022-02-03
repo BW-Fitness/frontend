@@ -36,8 +36,8 @@ export default function SignupForm(props) {
 
   return (
     <SignupWrapper>
-      <FormBox>
-        <Form onSubmit={handleSubmit}>
+      <SignupFormBox>
+        <SignForm onSubmit={handleSubmit}>
           <h1>Register</h1>
           <label htmlFor="roleSelect">Role: </label>
           <select
@@ -73,8 +73,8 @@ export default function SignupForm(props) {
           />
           <br/>
           <button>Sign Up</button>
-        </Form>
-      </FormBox>
+        </SignForm>
+      </SignupFormBox>
     </SignupWrapper>
   );
 }
@@ -90,14 +90,14 @@ const SignupWrapper = styled.div`
   background-size: cover;
 `;
 
-const FormBox = styled.div`
+const SignupFormBox = styled.div`
   width: 40%;
   background-color: #fff;
   padding: 5% 4%;
   border-radius: 7px;
 `;
 
-const Form = styled.div`
+const SignForm = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;'
